@@ -15,6 +15,12 @@ test('lavka-test', async ({ page }) => {
    await page.locator(`xpath=//span[contains(text(),"5805")]/../../../div`).click();    
    await page.locator('.options-selector__item').getByText("42").click(); 
    await page.locator('.button').getByText('Выбрать').click();
+
+   await expect(page.locator('.success-add-modal__header')).toHaveText('Товар добавлен в корзину');
+   await expect(page.locator('.success-add-modal__text--title')).toContainText("5805");  
+   await expect(page.locator('//p[contains(text(),"артикул")]')).toContainText("5805"); 
+      
+   await expect(page.locator('//p[@class="success-add-modal__text"][contains(text(),"Размер")]')).toContainText("42"); 
      
  });
  
