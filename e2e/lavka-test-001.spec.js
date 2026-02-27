@@ -1,8 +1,11 @@
 import { test, expect } from '@playwright/test';
 
- 
+const size = "42";
+const artikulNumber = "5805";
+const mainURL = "https://ramonki.by/";
+
 test('lavka-test', async ({ page }) => {
-   await page.goto("https://ramonki.by/");
+   await page.goto(mainURL);
     
    await page.locator('body > div.v-modal.sale > div > span').click();
    await page.getByText('Каталог').click();
@@ -13,14 +16,14 @@ test('lavka-test', async ({ page }) => {
    await page.locator('.filter__text').getByText('Платья и сарафаны').click(); 
 
    await page.locator(`xpath=//span[contains(text(),"5805")]/../../../div`).click();    
-   await page.locator('.options-selector__item').getByText("42").click(); 
+   await page.locator('.options-selector__item').getByText(size).click(); 
    await page.locator('.button').getByText('Выбрать').click();
 
    await expect(page.locator('.success-add-modal__header')).toHaveText('Товар добавлен в корзину');
-   await expect(page.locator('.success-add-modal__text--title')).toContainText("5805");  
-   await expect(page.locator('//p[contains(text(),"артикул")]')).toContainText("5805"); 
-      
-   await expect(page.locator('//p[@class="success-add-modal__text"][contains(text(),"Размер")]')).toContainText("42"); 
+   await expect(page.locator('.success-add-modal__text--title')).toContainText(`${artikulNumber}`); //toContainText("5805");
+   await expect(page.locator('//p[contains(text(),"артикул")]')).toContainText(`${artikulNumber}`);//  //(`${artikulNumber}`));
+   
+   await expect(page.locator('//p[@class="success-add-modal__text"][contains(text(),"Размер")]')).toContainText(`${size}`);//("42");
      
  });
  
