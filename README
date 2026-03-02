@@ -1,0 +1,1 @@
+ npx playwright test lavka-test-001.spec.js  --project=chromium --headed
